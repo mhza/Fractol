@@ -6,7 +6,7 @@
 /*   By: mhaziza <mhaziza@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/18 15:24:24 by mhaziza           #+#    #+#             */
-/*   Updated: 2016/12/19 18:29:18 by mhaziza          ###   ########.fr       */
+/*   Updated: 2016/12/19 18:42:26 by mhaziza          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,5 +47,5 @@ typedef	struct	s_env
 int		ft_expose_fractal(t_env *e);
 void	ft_display_comments(t_env *e);
 int		key_hook(int keycode, t_env *e);
-
+void	ft_init_env(t_env *e, t_img *image);
 #endif

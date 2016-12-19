@@ -6,7 +6,7 @@
 /*   By: mhaziza <mhaziza@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/10 16:35:53 by mhaziza           #+#    #+#             */
-/*   Updated: 2016/12/18 19:03:37 by mhaziza          ###   ########.fr       */
+/*   Updated: 2016/12/19 18:53:15 by mhaziza          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ int		key_hook(int keycode, t_env *e)
 	if (keycode == 53)
 		exit(0);
 	mlx_clear_window(e->mlx, e->win);
+	e->image->data = mlx_get_data_addr(e->image->ptr, &e->image->bbp,
+		&e->image->size_line, &e->image->endian);
 	ft_expose_fractal(e);
 	ft_display_comments(e);
 	return (0);

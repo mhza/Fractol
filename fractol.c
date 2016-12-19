@@ -6,7 +6,7 @@
 /*   By: mhaziza <mhaziza@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/18 15:23:40 by mhaziza           #+#    #+#             */
-/*   Updated: 2016/12/19 18:31:15 by mhaziza          ###   ########.fr       */
+/*   Updated: 2016/12/19 18:54:29 by mhaziza          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,13 @@ int		ft_expose_fractal(t_env *e)
 	t_img	*image;
 
 	image = e->image;
+
+	image->x1 = -2.1;
+	image->x2 = 0.6;
+	image->y1 = -1.2;
+	image->y2 = 1.2;
+	image->image_x = (image->x2 - image->x1) * e->zoom;
+	image->image_y = (image->y2 - image->y1) * e->zoom;
 	x = 0;
 	y = 0;
 	is_out = 0;
@@ -65,7 +72,7 @@ int		ft_expose_fractal(t_env *e)
 		y = 0;
 		x += 1;
 	}
-	mlx_put_image_to_window(e->mlx, e->win, image->ptr, 0, 0);
+	mlx_put_image_to_window(e->mlx, e->win, image->ptr, e->th, e->tv);
 	return (0);
 }
 
@@ -74,17 +81,11 @@ void	ft_init_env(t_env *e, t_img *image)
 	e->mlx = mlx_init();
 	e->win = mlx_new_window(e->mlx, WIN_X, WIN_Y, "fractol42");
 	e->zoom = 100;
-	e->th = 300;
-	e->tv = 300;
-	image->ptr = mlx_new_image(e->mlx, WIN_X, WIN_Y);
+	e->th = 10;
+	e->tv = 50;
+	image->ptr = mlx_new_image(e->mlx, 300, 300);
 	image->data = mlx_get_data_addr(image->ptr, &image->bbp,
 		&image->size_line, &image->endian);
-	image->x1 = -2.1;
-	image->x2 = 0.6;
-	image->y1 = -1.2;
-	image->y2 = 1.2;
-	image->image_x = (image->x2 - image->x1) * e->zoom;
-	image->image_y = (image->y2 - image->y1) * e->zoom;
 	e->image = image;
 }
 
