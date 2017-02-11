@@ -6,7 +6,7 @@
 /*   By: mhaziza <mhaziza@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/04 11:56:17 by mhaziza           #+#    #+#             */
-/*   Updated: 2017/02/11 20:12:59 by mhaziza          ###   ########.fr       */
+/*   Updated: 2017/02/11 23:30:21 by mhaziza          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,15 +46,7 @@ int		ft_expose_fractal(t_env *e)
 	int		x;
 	int		y;
 	int		is_out;
-	t_img	*image;
 
-	image = e->image;
-	// image->x1 = -2.1;
-	// image->x2 = 0.6;
-	// image->y1 = -1.2;
-	// image->y2 = 1.2;
-	// image->image_x = (image->x2 - image->x1) * e->zoom;
-	// image->image_y = (image->y2 - image->y1) * e->zoom;
 	x = 0;
 	is_out = 0;
 	while (x < WIN_X)
@@ -62,24 +54,25 @@ int		ft_expose_fractal(t_env *e)
 		y = 0;
 		while (y < WIN_Y)
 		{
-			if ((is_out = ft_is_out(e, x, y, image)))
-			{
-				*(image->data + y * image->size_line + x * 4) = 50 + (255 + e->color->r * 10) / ITER_MAX * is_out;
-				*(image->data + y * image->size_line + x * 4 + 1) = (255 + e->color->g * 10) / ITER_MAX * is_out;
-				*(image->data + y * image->size_line + x * 4 + 2) = 50 + (255 + e->color->b * 10) / ITER_MAX * is_out;
-				*(image->data + y * image->size_line + x * 4 + 3) = 0;
-			}
-			else
-			{
-				*(image->data + y * image->size_line + x * 4) = 0;
-				*(image->data + y * image->size_line + x * 4 + 1) = 0;
-				*(image->data + y * image->size_line + x * 4 + 2) = 0;
-				*(image->data + y * image->size_line + x * 4 + 3) = 0;
-			}
+			set_data_img(e, ft_is_out(e, x, y, e->image), x, y);
+			// if ((is_out = ft_is_out(e, x, y, image)))
+			// {
+			// 	*(image->data + y * image->size_line + x * 4) = 50 + (255 + e->color->r * 10) / ITER_MAX * is_out;
+			// 	*(image->data + y * image->size_line + x * 4 + 1) = (255 + e->color->g * 10) / ITER_MAX * is_out;
+			// 	*(image->data + y * image->size_line + x * 4 + 2) = 50 + (255 + e->color->b * 10) / ITER_MAX * is_out;
+			// 	*(image->data + y * image->size_line + x * 4 + 3) = 0;
+			// }
+			// else
+			// {
+			// 	*(image->data + y * image->size_line + x * 4) = 0;
+			// 	*(image->data + y * image->size_line + x * 4 + 1) = 0;
+			// 	*(image->data + y * image->size_line + x * 4 + 2) = 0;
+			// 	*(image->data + y * image->size_line + x * 4 + 3) = 0;
+			// }
 			y += 1;
 		}
 		x += 1;
 	}
-	mlx_put_image_to_window(e->mlx, e->win, image->ptr, 0, 0);
+	mlx_put_image_to_window(e->mlx, e->win, e->image->ptr, 0, 0);
 	return (0);
 }

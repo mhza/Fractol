@@ -6,7 +6,7 @@
 /*   By: mhaziza <mhaziza@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/18 15:24:24 by mhaziza           #+#    #+#             */
-/*   Updated: 2017/02/11 20:19:25 by mhaziza          ###   ########.fr       */
+/*   Updated: 2017/02/11 23:27:53 by mhaziza          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@
 # define WIN_Y 800
 # define ITER_MAX 100
 # define ZOOM_INIT 300
+# define MOTION_NOTIFY 6
+# define PTR_MOTION_MASK (1L<<6)
 
 
 typedef struct	s_color
@@ -62,14 +64,15 @@ typedef	struct	s_env
 	t_color	*color;
 }				t_env;
 
+void			clear_and_draw(t_env *e);
 int				ft_expose_fractal(t_env *e);
 void			ft_display_comments(t_env *e);
 int				key_hook(int keycode, t_env *e);
-int					loop_hook(t_env *e);
+int				loop_hook(t_env *e);
 void			ft_init_env(t_env *e, t_img *image);
 int				mouse_hook(int button, int x, int y, t_env *e);
-
-
+int				mouse_motion(int x, int y, t_env *e);
+void			set_data_img(t_env *e, int is_out, int x, int y);
 
 
 #endif

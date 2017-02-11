@@ -6,12 +6,23 @@
 /*   By: mhaziza <mhaziza@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/18 15:23:40 by mhaziza           #+#    #+#             */
-/*   Updated: 2017/02/11 22:03:08 by mhaziza          ###   ########.fr       */
+/*   Updated: 2017/02/11 23:30:53 by mhaziza          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
+
+void	clear_and_draw(t_env *e)
+{
+	mlx_clear_window(e->mlx, e->win);
+	ft_display_comments(e);
+	e->image->data = mlx_get_data_addr(e->image->ptr, &e->image->bbp,
+		&e->image->size_line, &e->image->endian);
+	ft_expose_fractal(e);
+	ft_display_comments(e);
+	loop_hook(e);
+}
 void	ft_init_env(t_env *e, t_img *image)
 {
 
@@ -49,11 +60,6 @@ int		loop_hook(t_env *e)
 	return (1);
 }
 
-// int		loop_hook(t_env *e)
-// {
-// 	return (1);
-// }
-
 int		main(void)
 {
 	t_env	e;
@@ -64,10 +70,6 @@ int		main(void)
 	color.g = 0;
 	color.b = 0;
 	e.color = &color;
-	// if ((e = (t_env*)ft_memalloc(sizeof(t_env))) == NULL)
-	// 	return (0);
-	// if ((image = (t_img*)ft_memalloc(sizeof(t_img))) == NULL)
-	// 	return (0);
 	ft_init_env(&e, &image);
 	// perte d'info : mouse_hook infonctionnel
 	// image.ptr = mlx_new_image(e.mlx, WIN_X, WIN_Y);
@@ -75,16 +77,11 @@ int		main(void)
 	// 	&image.size_line, &image.endian);
 	ft_expose_fractal(&e);
 	ft_display_comments(&e);
+	mlx_hook(e.win, MOTION_NOTIFY, PTR_MOTION_MASK, mouse_motion, &e);
 	// mlx_loop_hook(e->mlx, loop_hook, e);
 	mlx_key_hook(e.win, key_hook, &e);
-// mlx_do_key_autorepeaton(e.mlx);
+	// mlx_do_key_autorepeaton(e.mlx);
 	mlx_mouse_hook(e.win, mouse_hook, &e);
 	mlx_loop(e.mlx);
 	return (0);
 }
-
-
-
-//
-// mlx_mouse_hook(e->win, mouse_hook, e);
-// mlx_hook(e->win, MOTION_NOTIFY, PTR_MOTION_MASK, mouse_move_hook, e);
