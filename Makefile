@@ -6,7 +6,7 @@
 #    By: mhaziza <mhaziza@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/12/18 15:25:15 by mhaziza           #+#    #+#              #
-#    Updated: 2016/12/19 17:03:30 by mhaziza          ###   ########.fr        #
+#    Updated: 2017/02/11 15:31:40 by mhaziza          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,9 @@ CC		=   gcc
 CFLAGS	= 	-Wall -Wextra -Werror -I. -g
 RM		=   rm -f
 SRCS	=	fractol.c \
-			ft_hook_utils.c \
+			mousehook_utils.c \
+			keyhook_utils.c \
+			mandelbrot.c \
 
 OBJS	=   $(SRCS:.c=.o)
 
@@ -26,7 +28,7 @@ all:	$(NAME)
 
 $(NAME):$(OBJS)
 	@make -C $(LIBFT_PATH)
-	@$(CC) $(CFLAG) $(SRCS) -I/usr/local/include/mlx.h -lmlx -framework OpenGL -framework Appkit -L./libft -lft -o $(NAME)
+	@$(CC) $(CFLAG) $(SRCS) -I./mlx/mlx.h ./mlx/libmlx.a -framework OpenGL -framework Appkit -L./libft -lft -o $(NAME)
 
 clean:
 	@rm -f $(OBJS)
