@@ -6,7 +6,7 @@
 /*   By: mhaziza <mhaziza@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/18 15:24:24 by mhaziza           #+#    #+#             */
-/*   Updated: 2017/02/12 21:06:37 by mhaziza          ###   ########.fr       */
+/*   Updated: 2017/02/12 23:33:30 by mhaziza          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ typedef struct	s_color
 	int	r;
 	int	g;
 	int	b;
+	int	neg;
 }				t_color;
 
 typedef	struct	s_img
@@ -77,7 +78,6 @@ int				mandelbrot(t_env *e, int x, int y);
 int				julia(t_env *e, int x, int y);
 int				burnship(t_env *e, int x, int y);
 void			clear_and_draw(t_env *e);
-int				ft_expose_fractal(t_env *e);
 int				ft_expose_fractal_th(t_env *e);
 void			ft_display_comments(t_env *e);
 int				key_hook(int keycode, t_env *e);
@@ -85,6 +85,9 @@ int				loop_hook(t_env *e);
 void			ft_init_env(t_env *e, t_img *image);
 int				mouse_hook(int button, int x, int y, t_env *e);
 int				mouse_motion(int x, int y, t_env *e);
-void			set_data_img(t_env *e, int x, int y);
 t_color			*set_colors(t_env *e, int is_out);
+int				display_cmds(void);
+
+
+
 #endif

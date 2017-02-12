@@ -6,7 +6,7 @@
 /*   By: mhaziza <mhaziza@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/18 15:23:40 by mhaziza           #+#    #+#             */
-/*   Updated: 2017/02/12 21:09:27 by mhaziza          ###   ########.fr       */
+/*   Updated: 2017/02/12 23:39:15 by mhaziza          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,8 @@ void	clear_and_draw(t_env *e)
 	mlx_clear_window(e->mlx, e->win);
 	e->image->data = mlx_get_data_addr(e->image->ptr, &e->image->bbp,
 		&e->image->size_line, &e->image->endian);
-	// ft_expose_fractal_th(e);
-	ft_expose_fractal(e);
-	// ft_display_comments(e);
+	ft_expose_fractal_th(e);
+	ft_display_comments(e);
 	loop_hook(e);
 }
 
@@ -36,12 +35,12 @@ void	ft_init_env(t_env *e, t_img *image)
 	e->im_zo = 0;
 	if (e->id_f == 1)
 	{
-		e->re_c =  0.285;
+		e->re_c = 0.285;
 		e->im_c = 0.52;
 	}
 	else
 	{
-		e->re_c =  0;
+		e->re_c = 0;
 		e->im_c = 0;
 	}
 	e->block = 1;
@@ -52,11 +51,8 @@ void	ft_init_env(t_env *e, t_img *image)
 }
 
 int		loop_hook(t_env *e)
-{printf("chelou\n");
-ft_expose_fractal(e);
-
+{
 	mlx_loop(e->mlx);
-
 	return (1);
 }
 
@@ -70,14 +66,14 @@ int		main(int ac, char **av)
 	color.g = 0;
 	color.b = 0;
 	e.color = &color;
-	if (ac > 1)
-		e.id_f = ft_atoi(av[1]);
-	// ft_expose_fractal_th(NULL);
+	if (ac != 2 ||
+		(ft_atoi(av[1]) != 1 && ft_atoi(av[1]) != 2 && ft_atoi(av[1]) != 3))
+		return (display_cmds());
+	else
+		e.id_f = ft_atoi(av[1]) - 1;
 	ft_init_env(&e, &image);
-	//	mlx_loop_hook (e.win, loop_hook, &e);
-	ft_expose_fractal(&e);
-	// ft_expose_fractal_th(&e);
-	// ft_display_comments(&e);
+	ft_expose_fractal_th(&e);
+	ft_display_comments(&e);
 	mlx_hook(e.win, MOTION_NOTIFY, PTR_MOTION_MASK, mouse_motion, &e);
 	mlx_key_hook(e.win, key_hook, &e);
 	mlx_mouse_hook(e.win, mouse_hook, &e);
