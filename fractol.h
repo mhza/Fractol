@@ -6,7 +6,7 @@
 /*   By: mhaziza <mhaziza@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/18 15:24:24 by mhaziza           #+#    #+#             */
-/*   Updated: 2017/02/12 16:37:17 by mhaziza          ###   ########.fr       */
+/*   Updated: 2017/02/12 21:06:37 by mhaziza          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@
 # include <stdio.h>
 # include <math.h>
 # include <pthread.h>
-# define WIN_X 2000
-# define WIN_Y 1600
+# define WIN_X 1500
+# define WIN_Y 900
 # define ZOOM_INIT 300
 # define ABSX -0.8
 # define ABSY 0
@@ -62,9 +62,10 @@ typedef	struct	s_env
 	int		ty;
 	float	x;
 	float	y;
-	int		re_zo;
-	int		im_zo;
+	float		re_zo;
+	float		im_zo;
 	int		id_f;
+	int		block;
 	float	re_c;
 	float	im_c;
 	t_color	*color;
@@ -72,7 +73,9 @@ typedef	struct	s_env
 }				t_env;
 
 typedef			int(*fct)(t_env *e, int x, int y);
+int				mandelbrot(t_env *e, int x, int y);
 int				julia(t_env *e, int x, int y);
+int				burnship(t_env *e, int x, int y);
 void			clear_and_draw(t_env *e);
 int				ft_expose_fractal(t_env *e);
 int				ft_expose_fractal_th(t_env *e);
@@ -82,6 +85,6 @@ int				loop_hook(t_env *e);
 void			ft_init_env(t_env *e, t_img *image);
 int				mouse_hook(int button, int x, int y, t_env *e);
 int				mouse_motion(int x, int y, t_env *e);
-void			set_data_img(t_env *e, int is_out, int x, int y);
+void			set_data_img(t_env *e, int x, int y);
 t_color			*set_colors(t_env *e, int is_out);
 #endif

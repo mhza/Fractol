@@ -6,7 +6,7 @@
 /*   By: mhaziza <mhaziza@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/10 16:35:53 by mhaziza           #+#    #+#             */
-/*   Updated: 2017/02/12 14:41:21 by mhaziza          ###   ########.fr       */
+/*   Updated: 2017/02/12 19:18:18 by mhaziza          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,11 +53,14 @@ int		key_hook(int keycode, t_env *e)
 	}
 	else if (keycode < 20)
 		key_hook_color(keycode, e);
+	else if (keycode == 37)
+		e->block = 1 - e->block;
 	else if (keycode == 53)
 	{
 		mlx_destroy_window(e->mlx, e->win);
 		exit(0);
 	}
+	if (keycode != 269)
 	clear_and_draw(e);
 	return (1);
 }
