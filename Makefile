@@ -6,7 +6,7 @@
 #    By: mhaziza <mhaziza@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/12/18 15:25:15 by mhaziza           #+#    #+#              #
-#    Updated: 2017/02/11 23:26:02 by mhaziza          ###   ########.fr        #
+#    Updated: 2017/02/12 16:38:52 by mhaziza          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,8 +21,9 @@ SRCS	=	fractol.c \
 			mousehook_utils.c \
 			keyhook_utils.c \
 			draw_utils.c \
-			mandelbrot.c \
+			julia.c \
 			ihm_utils.c \
+			threads_utils.c \
 
 OBJS	=   $(SRCS:.c=.o)
 

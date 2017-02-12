@@ -6,7 +6,7 @@
 /*   By: mhaziza <mhaziza@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/18 15:24:24 by mhaziza           #+#    #+#             */
-/*   Updated: 2017/02/11 23:27:53 by mhaziza          ###   ########.fr       */
+/*   Updated: 2017/02/12 16:37:17 by mhaziza          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,25 @@
 # include "libft/libft.h"
 # include <stdio.h>
 # include <math.h>
-# define WIN_X 1000
-# define WIN_Y 800
-# define ITER_MAX 100
+# include <pthread.h>
+# define WIN_X 2000
+# define WIN_Y 1600
 # define ZOOM_INIT 300
+# define ABSX -0.8
+# define ABSY 0
+# define X1 -2.46 			//	-WIN_X / (2 * ZOOM_INIT) - ABSX
+# define Y1 -1.33 			//	-WIN_Y / (2 * ZOOM_INIT) - ABSY
+# define X1_DIFF_C -1.71	//	X1 - ABSX
+# define Y1_DIFF_C -1.33	//	Y1 - ABSY
+# define ITER_MAX 100
 # define MOTION_NOTIFY 6
 # define PTR_MOTION_MASK (1L<<6)
 
+typedef struct	s_cplex
+{
+	float	re;
+	float	im;
+}				t_cplex;
 
 typedef struct	s_color
 {
@@ -38,13 +50,6 @@ typedef	struct	s_img
 	int		bbp;
 	int		size_line;
 	int		endian;
-	float	x1;
-	float	x2;
-	float	y1;
-	float	y2;
-
-	// float	image_x;
-	// float	image_y;
 }				t_img;
 
 typedef	struct	s_env
@@ -52,20 +57,25 @@ typedef	struct	s_env
 	void	*mlx;
 	void	*win;
 	t_img	*image;
-	float		zoom;
+	float	zoom;
 	int		tx;
 	int		ty;
-	float		x;
-	float		y;
+	float	x;
+	float	y;
 	int		re_zo;
 	int		im_zo;
+	int		id_f;
 	float	re_c;
 	float	im_c;
 	t_color	*color;
+
 }				t_env;
 
+typedef			int(*fct)(t_env *e, int x, int y);
+int				julia(t_env *e, int x, int y);
 void			clear_and_draw(t_env *e);
 int				ft_expose_fractal(t_env *e);
+int				ft_expose_fractal_th(t_env *e);
 void			ft_display_comments(t_env *e);
 int				key_hook(int keycode, t_env *e);
 int				loop_hook(t_env *e);
@@ -73,6 +83,5 @@ void			ft_init_env(t_env *e, t_img *image);
 int				mouse_hook(int button, int x, int y, t_env *e);
 int				mouse_motion(int x, int y, t_env *e);
 void			set_data_img(t_env *e, int is_out, int x, int y);
-
-
+t_color			*set_colors(t_env *e, int is_out);
 #endif

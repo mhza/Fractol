@@ -6,46 +6,48 @@
 /*   By: mhaziza <mhaziza@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/11 15:32:06 by mhaziza           #+#    #+#             */
-/*   Updated: 2017/02/11 23:09:39 by mhaziza          ###   ########.fr       */
+/*   Updated: 2017/02/12 14:55:47 by mhaziza          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-int				mouse_hook(int button, int x, int y, t_env *e)
+int		mouse_hook(int button, int x, int y, t_env *e)
 {
-	if (button)
-		ft_putnbr(button);
-
 	if (button == 1)
 	{
-		e->tx = x - e->zoom * 1.71;
-		e->ty = y - e->zoom * 1.33;
-		// dapres formule : tx = (x1 - re_c) * zoom + x
+		e->tx = x + e->zoom * X1_DIFF_C;
+		e->ty = y + e->zoom * Y1_DIFF_C;
 	}
-	else if (button == 4)
+	else if (button == 4 || button == 5)
 	{
-		e->zoom *= 0.8;
-		e->tx = x - e->zoom * 1.71;
-		e->ty = y - e->zoom * 1.33;
+		e->zoom = button == 4 ? e->zoom * 0.8 : e->zoom * 1.2;
+		e->tx = x + e->zoom * X1_DIFF_C;
+		e->ty = y + e->zoom * Y1_DIFF_C;
 	}
-	else if (button == 5)
+	else if (button == 2)
 	{
-		e->zoom *= 1.2;
-		e->tx = x - e->zoom * 1.71;
-		e->ty = y - e->zoom * 1.33;
+	// i = 0;
+	// while (i < 1000)
+	// {printf("button 2");
+	// 	e->color->r += i * 10 + 100;
+	// 	e->color->g += i * 10 + 10;
+	// 	e->color->b += i * 10 + 50;
+	// 	i++;
+	// }
 	}
-	printf("mouse e->tx %i, e->ty %i, x %i, y %i\n",e->tx, e->ty, x, y);
 	clear_and_draw(e);
 	return (1);
 }
 
-
-int 	mouse_motion(int x, int y, t_env *e)
-{//printf("mouse motion\n");
-	e->color->r += x/100;
-	e->color->g += y/100;
-	e->color->b += 90;
-	clear_and_draw(e);
+int		mouse_motion(int x, int y, t_env *e)
+{
+	if (e->id_f == 1 && x < WIN_X / 10 && y < WIN_X / 10)
+	{
+		e->color->r += rand();
+		e->color->g += rand();
+		e->color->b += rand();
+		clear_and_draw(e);
+	}
 	return (1);
 }
