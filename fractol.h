@@ -6,7 +6,7 @@
 /*   By: mhaziza <mhaziza@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/18 15:24:24 by mhaziza           #+#    #+#             */
-/*   Updated: 2017/02/13 17:46:37 by mhaziza          ###   ########.fr       */
+/*   Updated: 2017/02/14 22:32:29 by mhaziza          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ typedef	struct	s_env
 
 }				t_env;
 
-typedef			int(*fct)(t_env *e, int x, int y);
+typedef int(*t_fct)(t_env *e, int x, int y);
 int				mandelbrot(t_env *e, int x, int y);
 int				julia(t_env *e, int x, int y);
 int				burnship(t_env *e, int x, int y);
@@ -89,6 +89,7 @@ int				mouse_hook(int button, int x, int y, t_env *e);
 int				mouse_motion(int x, int y, t_env *e);
 t_color			*set_colors(t_env *e, int is_out);
 int				display_cmds(void);
+void			key_hook_trans_zoom(int keycode, t_env *e);
 
 
 

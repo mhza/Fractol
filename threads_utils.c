@@ -6,13 +6,13 @@
 /*   By: mhaziza <mhaziza@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/12 14:56:40 by mhaziza           #+#    #+#             */
-/*   Updated: 2017/02/14 11:12:04 by mhaziza          ###   ########.fr       */
+/*   Updated: 2017/02/14 22:00:01 by mhaziza          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-static fct		g_frac[] =
+static t_fct		g_frac[] =
 {
 	mandelbrot,
 	julia,

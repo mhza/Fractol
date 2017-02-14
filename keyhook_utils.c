@@ -6,7 +6,7 @@
 /*   By: mhaziza <mhaziza@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/10 16:35:53 by mhaziza           #+#    #+#             */
-/*   Updated: 2017/02/14 11:11:49 by mhaziza          ###   ########.fr       */
+/*   Updated: 2017/02/14 22:19:10 by mhaziza          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,14 +54,18 @@ static void	key_hook_color(int keycode, t_env *e)
 	}
 }
 
-static void	key_hook_trans_zoom(int keycode, t_env *e)
+void	key_hook_trans_zoom(int keycode, t_env *e)
 {
 	if (keycode == 123 || keycode == 124)
 		e->tx = keycode == 124 ? e->tx + 0.1 * WIN_X : e->tx - 0.1 * WIN_X;
 	else if (keycode == 125 || keycode == 126)
 		e->ty = keycode == 125 ? e->ty + 0.1 * WIN_Y : e->ty - 0.1 * WIN_Y;
 	else if ((keycode == 78 && e->zoom > 10) || keycode == 69)
+	{
 		e->zoom = keycode == 78 ? e->zoom / 1.2 : e->zoom * 1.2;
+		e->tx = (1 - e->zoom / ZOOM_INIT) * WIN_X / 2;
+		e->ty = (1 - e->zoom / ZOOM_INIT) * WIN_Y / 2;
+	}
 }
 
 static void	key_hook_select(int keycode, t_env *e)

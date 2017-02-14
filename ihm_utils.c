@@ -6,7 +6,7 @@
 /*   By: mhaziza <mhaziza@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/11 23:10:32 by mhaziza           #+#    #+#             */
-/*   Updated: 2017/02/12 23:34:48 by mhaziza          ###   ########.fr       */
+/*   Updated: 2017/02/14 22:28:43 by mhaziza          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ void			ft_display_comments(t_env *e)
 		ft_get_color(255, 255, 255), "L      = Lock Julia's cste");
 	mlx_string_put(e->mlx, e->win, 10, 120,
 		ft_get_color(255, 255, 255), "1 2 3  = Mandelbrot/Julia/Burningship");
+	mlx_string_put(e->mlx, e->win, 10, 135,
+		ft_get_color(255, 255, 255), "N      = new window");
 }
 
 int				display_cmds(void)
