@@ -6,7 +6,7 @@
 /*   By: mhaziza <mhaziza@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/11 15:22:00 by mhaziza           #+#    #+#             */
-/*   Updated: 2017/02/12 13:00:57 by mhaziza          ###   ########.fr       */
+/*   Updated: 2017/02/14 11:10:37 by mhaziza          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,9 @@ else
 
 
 
+// colors.r = e->color->r + (255 ) / ITER_MAX * is_out;
+// colors.g = e->color->g + (255 ) / ITER_MAX * is_out;
+// colors.b = e->color->b + (255 ) / ITER_MAX * is_out;
 
 
 

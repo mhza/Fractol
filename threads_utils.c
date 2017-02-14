@@ -6,7 +6,7 @@
 /*   By: mhaziza <mhaziza@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/12 14:56:40 by mhaziza           #+#    #+#             */
-/*   Updated: 2017/02/12 23:38:30 by mhaziza          ###   ########.fr       */
+/*   Updated: 2017/02/14 11:12:04 by mhaziza          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,6 @@ int			ft_expose_fractal_th(t_env *e)
 		ret = pthread_create(&(th[x]), NULL, &set_data_th, (void*)e);
 		pthread_join(th[x], NULL);
 	}
-	// x = -1;
-	// while (++x < WIN_X)
-	// 	ret = pthread_join(th[x], NULL);
 	mlx_put_image_to_window(e->mlx, e->win, e->image->ptr, 0, 0);
 	return (0);
 }

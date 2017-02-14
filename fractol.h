@@ -6,7 +6,7 @@
 /*   By: mhaziza <mhaziza@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/18 15:24:24 by mhaziza           #+#    #+#             */
-/*   Updated: 2017/02/12 23:33:30 by mhaziza          ###   ########.fr       */
+/*   Updated: 2017/02/13 17:46:37 by mhaziza          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,12 +63,14 @@ typedef	struct	s_env
 	int		ty;
 	float	x;
 	float	y;
-	float		re_zo;
-	float		im_zo;
+	float	re_zo;
+	float	im_zo;
 	int		id_f;
 	int		block;
 	float	re_c;
 	float	im_c;
+	float	scro_x;
+	float	scro_y;
 	t_color	*color;
 
 }				t_env;

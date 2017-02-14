@@ -6,11 +6,31 @@
 /*   By: mhaziza <mhaziza@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/10 16:35:53 by mhaziza           #+#    #+#             */
-/*   Updated: 2017/02/12 23:32:21 by mhaziza          ###   ########.fr       */
+/*   Updated: 2017/02/14 11:11:49 by mhaziza          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
+
+static void	key_new(int current_id)
+{
+	t_env	e;
+	t_img	image;
+	t_color	color;
+
+	color.r = 0;
+	color.g = 0;
+	color.b = 0;
+	e.color = &color;
+	e.id_f = current_id == 2 ? 0 : current_id + 1;
+	ft_init_env(&e, &image);
+	ft_expose_fractal_th(&e);
+	ft_display_comments(&e);
+	mlx_hook(e.win, MOTION_NOTIFY, PTR_MOTION_MASK, mouse_motion, &e);
+	mlx_key_hook(e.win, key_hook, &e);
+	mlx_mouse_hook(e.win, mouse_hook, &e);
+	mlx_loop(e.mlx);
+}
 
 static void	key_hook_color(int keycode, t_env *e)
 {
@@ -63,7 +83,6 @@ static void	key_hook_select(int keycode, t_env *e)
 
 int			key_hook(int keycode, t_env *e)
 {
-	printf("keycode %i\n", keycode);
 	if (keycode == 69 || keycode == 78 || keycode >= 123)
 		key_hook_trans_zoom(keycode, e);
 	else if (keycode == 82)
@@ -74,6 +93,8 @@ int			key_hook(int keycode, t_env *e)
 	}
 	else if (keycode < 20)
 		key_hook_color(keycode, e);
+	else if (keycode == 45)
+		key_new(e->id_f);
 	else if (keycode == 37)
 		e->block = 1 - e->block;
 	else if (keycode == 83 || keycode == 84 || keycode == 85)
