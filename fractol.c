@@ -6,7 +6,7 @@
 /*   By: mhaziza <mhaziza@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/18 15:23:40 by mhaziza           #+#    #+#             */
-/*   Updated: 2017/02/12 23:39:15 by mhaziza          ###   ########.fr       */
+/*   Updated: 2017/02/15 09:53:55 by mhaziza          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void	ft_init_env(t_env *e, t_img *image)
 	e->mlx = mlx_init();
 	e->win = mlx_new_window(e->mlx, WIN_X, WIN_Y, "MANDELBROT");
 	e->zoom = ZOOM_INIT;
+	e->iter = 50;
 	e->tx = 0;
 	e->ty = 0;
 	e->x = 1;

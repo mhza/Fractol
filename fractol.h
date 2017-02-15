@@ -6,7 +6,7 @@
 /*   By: mhaziza <mhaziza@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/18 15:24:24 by mhaziza           #+#    #+#             */
-/*   Updated: 2017/02/14 22:32:29 by mhaziza          ###   ########.fr       */
+/*   Updated: 2017/02/15 13:54:22 by mhaziza          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,11 @@
 # define ZOOM_INIT 300
 # define ABSX -0.8
 # define ABSY 0
-# define X1 -2.46 			//	-WIN_X / (2 * ZOOM_INIT) - ABSX
-# define Y1 -1.33 			//	-WIN_Y / (2 * ZOOM_INIT) - ABSY
-# define X1_DIFF_C -1.71	//	X1 - ABSX
-# define Y1_DIFF_C -1.33	//	Y1 - ABSY
-# define ITER_MAX 100
+# define X1 -2.46
+# define Y1 -1.33
+# define X1_DIFF_C -1.71
+# define Y1_DIFF_C -1.33
+# define ITER_MAX 50
 # define MOTION_NOTIFY 6
 # define PTR_MOTION_MASK (1L<<6)
 
@@ -59,8 +59,10 @@ typedef	struct	s_env
 	void	*win;
 	t_img	*image;
 	float	zoom;
+	int		iter;
 	int		tx;
 	int		ty;
+	float	xth;
 	float	x;
 	float	y;
 	float	re_zo;
@@ -89,8 +91,5 @@ int				mouse_hook(int button, int x, int y, t_env *e);
 int				mouse_motion(int x, int y, t_env *e);
 t_color			*set_colors(t_env *e, int is_out);
 int				display_cmds(void);
-void			key_hook_trans_zoom(int keycode, t_env *e);
-
-
 
 #endif

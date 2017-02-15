@@ -6,7 +6,7 @@
 /*   By: mhaziza <mhaziza@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/12 14:56:40 by mhaziza           #+#    #+#             */
-/*   Updated: 2017/02/14 22:00:01 by mhaziza          ###   ########.fr       */
+/*   Updated: 2017/02/15 10:08:27 by mhaziza          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static void	*set_data_th(void *tmp)
 	t_env	*e;
 
 	e = tmp;
-	x = e->x;
+	x = e->xth;
 	y = 0;
 	while (y < WIN_Y)
 	{
@@ -52,7 +52,7 @@ int			ft_expose_fractal_th(t_env *e)
 	x = -1;
 	while (++x < WIN_X)
 	{
-		e->x = x;
+		e->xth = x;
 		ret = pthread_create(&(th[x]), NULL, &set_data_th, (void*)e);
 		pthread_join(th[x], NULL);
 	}

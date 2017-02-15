@@ -6,7 +6,7 @@
 /*   By: mhaziza <mhaziza@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/04 11:56:17 by mhaziza           #+#    #+#             */
-/*   Updated: 2017/02/13 21:46:05 by mhaziza          ###   ########.fr       */
+/*   Updated: 2017/02/15 09:54:25 by mhaziza          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int		mandelbrot(t_env *e, int x, int y)
 	c.re = (x - e->tx) / e->zoom + X1;
 	c.im = (y - e->ty) / e->zoom + Y1;
 	mod = 0;
-	while (i < ITER_MAX && (mod < 4))
+	while (i < e->iter && (mod < 4))
 	{
 		tmp = z.re;
 		z.re = z.re * z.re - z.im * z.im + c.re;
@@ -34,7 +34,7 @@ int		mandelbrot(t_env *e, int x, int y)
 		mod = z.re * z.re + z.im * z.im;
 		i++;
 	}
-	if (i == ITER_MAX)
+	if (i == e->iter)
 		return (0);
 	return (i);
 }
@@ -53,7 +53,7 @@ int		julia(t_env *e, int x, int y)
 	c.re = e->re_c;
 	c.im = e->im_c;
 	mod = 0;
-	while (i < ITER_MAX && (mod < 4))
+	while (i < e->iter && (mod < 4))
 	{
 		tmp = z.re;
 		z.re = z.re * z.re - z.im * z.im + c.re;
@@ -80,7 +80,7 @@ int		burnship(t_env *e, int x, int y)
 	c.re = (x - e->tx) / e->zoom + X1;
 	c.im = (y - e->ty) / e->zoom + Y1;
 	mod = 0;
-	while (i < ITER_MAX && (mod < 4))
+	while (i < e->iter && (mod < 4))
 	{
 		tmp = z.re;
 		z.re = z.re * z.re - z.im * z.im + c.re;
@@ -88,7 +88,7 @@ int		burnship(t_env *e, int x, int y)
 		mod = z.re * z.re + z.im * z.im;
 		i++;
 	}
-	if (i == ITER_MAX)
+	if (i == e->iter)
 		return (0);
 	return (i);
 }
