@@ -6,7 +6,7 @@
 /*   By: mhaziza <mhaziza@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/10 16:35:53 by mhaziza           #+#    #+#             */
-/*   Updated: 2017/02/15 13:54:01 by mhaziza          ###   ########.fr       */
+/*   Updated: 2017/02/22 18:15:07 by mhaziza          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,15 +57,15 @@ static void	key_hook_color(int keycode, t_env *e)
 static void	key_hook_trans_zoom(int keycode, t_env *e)
 {
 	if (keycode == 123 || keycode == 124)
-		e->tx = keycode == 124 ? e->tx + 0.1 * WIN_X : e->tx - 0.1 * WIN_X;
+		e->tx = keycode == 124 ? e->tx + 0.05 * WIN_X : e->tx - 0.05 * WIN_X;
 	else if (keycode == 125 || keycode == 126)
-		e->ty = keycode == 125 ? e->ty + 0.1 * WIN_Y : e->ty - 0.1 * WIN_Y;
+		e->ty = keycode == 125 ? e->ty + 0.05 * WIN_Y : e->ty - 0.05 * WIN_Y;
 	else if ((keycode == 78 && e->zoom > 10) || keycode == 69)
 	{
+		e->iter = keycode == 78 ? e->iter - 1 : e->iter + 1;
 		e->zoom = keycode == 78 ? e->zoom / 1.2 : e->zoom * 1.2;
-		e->iter = keycode == 78 ? e->iter - 10 : e->iter + 10;
-		e->tx -= 0.1 * WIN_X;
-		e->ty -= 0.1 * WIN_Y;
+		e->tx = keycode == 78 ? e->tx + WIN_X / (2 * e->zoom) : e->tx - WIN_X / (2 * e->zoom);
+		e->ty = keycode == 78 ? e->ty + WIN_Y / (2 * e->zoom) : e->ty - WIN_Y / (2 * e->zoom);
 	}
 }
 
@@ -80,7 +80,6 @@ static void	key_hook_select(int keycode, t_env *e)
 	else
 	{
 		e->id_f = keycode == 83 ? 0 : 2;
-		e->ty = keycode == 83 ? e->ty : e->ty + 0.2 * WIN_Y;
 		e->re_c = 0;
 		e->im_c = 0;
 	}
@@ -93,8 +92,8 @@ int			key_hook(int keycode, t_env *e)
 	else if (keycode == 82)
 	{
 		e->zoom = ZOOM_INIT;
-		e->tx = 0;
-		e->ty = 0;
+		e->tx = - WIN_X / 2;
+		e->ty = - WIN_Y / 2;
 	}
 	else if (keycode < 20)
 		key_hook_color(keycode, e);
