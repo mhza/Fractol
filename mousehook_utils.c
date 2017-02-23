@@ -6,7 +6,7 @@
 /*   By: mhaziza <mhaziza@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/11 15:32:06 by mhaziza           #+#    #+#             */
-/*   Updated: 2017/02/23 11:08:50 by mhaziza          ###   ########.fr       */
+/*   Updated: 2017/02/23 17:57:36 by mhaziza          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,24 +18,24 @@ int		mouse_hook(int button, int x, int y, t_env *e)
 
 	if (button == 2 && y > 0)
 	{
-		e->tx = x + e->zoom * ABSX;
-		e->ty = y + e->zoom * ABSY;
+		e->tx = -WIN_X / 2;
+		e->ty = -WIN_Y / 2;
 		clear_and_draw(e);
 	}
 	else if (button == 1 && y > 0)
 	{
-		e->tx = x + e->zoom * X1_DIFF_C;
-		e->ty = y + e->zoom * Y1_DIFF_C;
+		e->tx += (x - WIN_X / 2);
+		e->ty += (y - WIN_Y / 2);
 		clear_and_draw(e);
 	}
 	else if (button == 4 || button == 5)
 	{
 		tmp = e->zoom;
 		e->zoom = button == 5 ? e->zoom * 0.8 : e->zoom * 1.2;
-		e->tx = button == 5 ? x * (tmp / e->zoom - 1) - WIN_X / 2 :
-		-x * (tmp / e->zoom - 1) - WIN_X / 2;
-		e->ty = button == 5 ? y * (tmp / e->zoom - 1) - WIN_Y / 2 :
-		-y * (tmp / e->zoom - 1) - WIN_Y / 2;
+		e->tx = button == 5 ? e->tx + (float)ABS(WIN_X / 2 - x) * (1 / e->zoom - 1 / tmp) :
+		e->tx - (float)ABS(WIN_X / 2 - x) * (1 / e->zoom - 1 / tmp);
+		e->ty = button == 5 ? e->ty + (float)ABS(WIN_Y / 2 - y) * (1 / e->zoom - 1 / tmp) :
+		e->ty - (float)ABS(WIN_Y / 2 - y) * (1 / e->zoom - 1 / tmp);
 		clear_and_draw(e);
 	}
 	return (1);
