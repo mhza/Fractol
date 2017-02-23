@@ -6,7 +6,7 @@
 /*   By: mhaziza <mhaziza@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/11 15:32:06 by mhaziza           #+#    #+#             */
-/*   Updated: 2017/02/22 19:23:09 by mhaziza          ###   ########.fr       */
+/*   Updated: 2017/02/23 11:08:50 by mhaziza          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 int		mouse_hook(int button, int x, int y, t_env *e)
 {
+	float tmp;
+
 	if (button == 2 && y > 0)
 	{
 		e->tx = x + e->zoom * ABSX;
@@ -28,23 +30,12 @@ int		mouse_hook(int button, int x, int y, t_env *e)
 	}
 	else if (button == 4 || button == 5)
 	{
-		// printf(">>>\nold e->zoom %.2f\n", e->zoom);
-		// printf("e->tx %.2f\n", e->tx);
-		// printf("e->ty %.2f\n", e->ty);
-		// printf("old x %.0f  new x %i\n", e->x, x);
-		// printf("old y %.0f  new y %i\n", e->y, y);
-		float tmp = e->zoom;
+		tmp = e->zoom;
 		e->zoom = button == 5 ? e->zoom * 0.8 : e->zoom * 1.2;
-		// printf("new e->zoom %.2f\n", e->zoom);
-		e->x = e->x * e->y == 1 ? x : e->x;
-		e->y = e->x * e->y == 1 ? y : e->y;
-		e->tx = button == 5 ? e->tx + ((x / tmp - x / e->zoom)) * e->zoom : e->tx - e->zoom * ((x - WIN_X / 2) / tmp - (x - WIN_X / 2) / e->zoom);
-		e->ty = button == 5 ? e->ty + ((y / tmp - y / e->zoom)) * e->zoom : e->ty - e->zoom * ((y - WIN_Y / 2) / tmp - (y - WIN_Y / 2) / e->zoom);
-		// printf("e->tx %.2f\n", e->tx);
-		// printf("e->ty %.2f\n", e->ty);
-
-		e->x = x;
-		e->y = y;
+		e->tx = button == 5 ? x * (tmp / e->zoom - 1) - WIN_X / 2 :
+		-x * (tmp / e->zoom - 1) - WIN_X / 2;
+		e->ty = button == 5 ? y * (tmp / e->zoom - 1) - WIN_Y / 2 :
+		-y * (tmp / e->zoom - 1) - WIN_Y / 2;
 		clear_and_draw(e);
 	}
 	return (1);

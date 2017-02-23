@@ -6,7 +6,7 @@
 /*   By: mhaziza <mhaziza@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/18 15:23:40 by mhaziza           #+#    #+#             */
-/*   Updated: 2017/02/22 14:52:10 by mhaziza          ###   ########.fr       */
+/*   Updated: 2017/02/23 11:07:23 by mhaziza          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,6 @@
 
 void	clear_and_draw(t_env *e)
 {
-	// printf(">>>\ne->zoom %.2f\n", e->zoom);
-	// printf("e->tx %.2f\n", e->tx);
-	// printf("e->ty %.2f\n", e->ty);
-	// printf("e->rec %.2f\n", e->re_c);
-	// printf("e->imc %.2f\n", e->im_c);
 	mlx_clear_window(e->mlx, e->win);
 	e->image->data = mlx_get_data_addr(e->image->ptr, &e->image->bbp,
 		&e->image->size_line, &e->image->endian);
@@ -40,13 +35,11 @@ void	ft_init_env(t_env *e, t_img *image)
 		e->im_c = 0;
 	}
 	e->mlx = mlx_init();
-	e->win = mlx_new_window(e->mlx, WIN_X, WIN_Y, "MANDELBROT");
+	e->win = mlx_new_window(e->mlx, WIN_X, WIN_Y, "Fract'ol");
 	e->zoom = ZOOM_INIT;
 	e->iter = ITER_MAX;
-	e->tx = - WIN_X / 2;
-	e->ty = - WIN_Y / 2;
-	e->x = 1;
-	e->y = 1;
+	e->tx = -WIN_X / 2;
+	e->ty = -WIN_Y / 2;
 	e->re_zo = 0;
 	e->im_zo = 0;
 	e->block = 1;

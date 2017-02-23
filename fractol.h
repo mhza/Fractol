@@ -6,7 +6,7 @@
 /*   By: mhaziza <mhaziza@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/18 15:24:24 by mhaziza           #+#    #+#             */
-/*   Updated: 2017/02/22 18:28:54 by mhaziza          ###   ########.fr       */
+/*   Updated: 2017/02/23 11:08:36 by mhaziza          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,10 @@
 # define ZOOM_INIT 200
 # define ABSX -0.8
 # define ABSY 0
-# define X1 -2.5 			//	-WIN_X / (2 * ZOOM_INIT) - ABSX
-# define Y1 -1.5 			//	-WIN_Y / (2 * ZOOM_INIT) - ABSY
-# define X1_DIFF_C -1.71	//	X1 - ABSX
-# define Y1_DIFF_C -1.33	//	Y1 - ABSY
+# define X1 -2.5
+# define Y1 -1.5
+# define X1_DIFF_C -1.71
+# define Y1_DIFF_C -1.33
 # define ITER_MAX 100
 # define MOTION_NOTIFY 6
 # define PTR_MOTION_MASK (1L<<6)
@@ -61,13 +61,9 @@ typedef	struct	s_env
 	t_img	*image;
 	float	zoom;
 	int		iter;
-	float		tx;
-	float		ty;
+	float	tx;
+	float	ty;
 	float	xth;
-	float	x;
-	float	y;
-	float	winx;
-	float	winy;
 	float	re_zo;
 	float	im_zo;
 	int		id_f;
@@ -80,7 +76,7 @@ typedef	struct	s_env
 
 }				t_env;
 
-typedef 		int(*t_fct)(t_env *e, int x, int y);
+typedef int(*t_fct)(t_env *e, int x, int y);
 int				mandelbrot(t_env *e, int x, int y);
 int				julia(t_env *e, int x, int y);
 int				burnship(t_env *e, int x, int y);

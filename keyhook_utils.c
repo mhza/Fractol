@@ -6,7 +6,7 @@
 /*   By: mhaziza <mhaziza@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/10 16:35:53 by mhaziza           #+#    #+#             */
-/*   Updated: 2017/02/22 18:15:07 by mhaziza          ###   ########.fr       */
+/*   Updated: 2017/02/23 11:01:35 by mhaziza          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,10 @@ static void	key_hook_trans_zoom(int keycode, t_env *e)
 	{
 		e->iter = keycode == 78 ? e->iter - 1 : e->iter + 1;
 		e->zoom = keycode == 78 ? e->zoom / 1.2 : e->zoom * 1.2;
-		e->tx = keycode == 78 ? e->tx + WIN_X / (2 * e->zoom) : e->tx - WIN_X / (2 * e->zoom);
-		e->ty = keycode == 78 ? e->ty + WIN_Y / (2 * e->zoom) : e->ty - WIN_Y / (2 * e->zoom);
+		e->tx = keycode == 78 ? e->tx + WIN_X / (2 * e->zoom) :
+		e->tx - WIN_X / (2 * e->zoom);
+		e->ty = keycode == 78 ? e->ty + WIN_Y / (2 * e->zoom) :
+		e->ty - WIN_Y / (2 * e->zoom);
 	}
 }
 
@@ -92,8 +94,8 @@ int			key_hook(int keycode, t_env *e)
 	else if (keycode == 82)
 	{
 		e->zoom = ZOOM_INIT;
-		e->tx = - WIN_X / 2;
-		e->ty = - WIN_Y / 2;
+		e->tx = -WIN_X / 2;
+		e->ty = -WIN_Y / 2;
 	}
 	else if (keycode < 20)
 		key_hook_color(keycode, e);

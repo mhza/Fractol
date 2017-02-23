@@ -6,7 +6,7 @@
 /*   By: mhaziza <mhaziza@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/12 14:56:40 by mhaziza           #+#    #+#             */
-/*   Updated: 2017/02/21 18:16:31 by mhaziza          ###   ########.fr       */
+/*   Updated: 2017/02/23 11:07:07 by mhaziza          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,6 @@ static void	*set_data_th(void *tmp)
 
 int			ft_expose_fractal_th(t_env *e)
 {
-
-
-	printf("range WIndow X/ zoom %.2f\n", (float)WIN_X/e->zoom);
-	printf("range WIndow Y / zoom %.2f\n", (float)WIN_Y/e->zoom);
 	int			x;
 	int			ret;
 	pthread_t	th[WIN_X];
